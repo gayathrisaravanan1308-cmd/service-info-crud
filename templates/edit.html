@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html><body style="font-family:Arial; padding:20px">
+<h2>Edit Service - ID {{r[0]}}</h2>
+<form method="POST">
+Name: <input name="name" value="{{r[1]}}"><br><br>
+Email: <input name="email" value="{{r[2]}}"><br><br>
+Phone: <input name="phone" value="{{r[5]}}"><br><br>
+Product: <input name="product" value="{{r[7]}}"><br><br>
+Issue: <textarea name="issue">{{r[8]}}</textarea><br><br>
+Location: <input name="location" value="{{r[10]}}"><br><br>
+Region: <input name="region" value="{{r[12]}}"><br><br>
+Status: <select name="status">
+<option {% if r[13]=='RECEIVED' %}selected{% endif %}>RECEIVED</option>
+<option {% if r[13]=='ACKNOWLEDGED' %}selected{% endif %}>ACKNOWLEDGED</option>
+<option {% if r[13]=='WIP' %}selected{% endif %}>WIP</option>
+<option {% if r[13]=='TECH-COMPLETED' %}selected{% endif %}>TECH-COMPLETED</option>
+<option {% if r[13]=='CLOSED' %}selected{% endif %}>CLOSED</option>
+</select><br><br>
+Remarks: <input name="remarks" value="{{r[14]}}"><br><br>
+<input type="submit" value="Update">
+</form>
+<br><a href="/">Back</a>
+</body></html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head><title>All Service Info</title>
+<style>
+body{font-family:Arial; background:#f2f2f2; padding:20px}
+.box{background:white; padding:15px; border-radius:8px}
+.top{display:flex; justify-content:space-between}
+.filter{background:#f8f9ff; padding:10px; margin:10px 0; display:flex; gap:15px; flex-wrap:wrap}
+table{width:100%; border-collapse:collapse; font-size:13px}
+th,td{border-bottom:1px solid #ddd; text-align:left; padding:8px}
+a{color:#5a5ae0; text-decoration:none}
+.badge{background:#e6f9e6; color:green; border:1px solid green; padding:3px 8px; border-radius:4px; font-size:11px}
+</style>
+</head>
+<body>
+<div class="box">
+<div class="top"><b>All Service Info</b><div>Search: <input type="text" id="search" onkeyup="mySearch()" placeholder="Search..."></div></div>
+
+<form method="GET" class="filter">
+<label>DATE RAISED<br><select name="date_filter"><option>All dates</option><option>Last 7 days</option><option>Last 30 days</option><option>This month</option><option>FY 2026-27 (Current)</option><option>FY 2025-26</option></select></label>
+<label>LOCATION<br><select name="location"><option value="">All locations</option><option>Chennai</option><option>Bangalore</option><option>Ahmedabad</option><option>Kallakurichi</option></select></label>
+<label>REGION<br><select name="region"><option value="">All regions</option><option>South</option><option>North</option><option>West</option><option>International</option></select></label>
+<label>STATUS<br><select name="status"><option value="">All statuses</option><option>RECEIVED</option><option>ACKNOWLEDGED</option><option>WIP</option><option>TECH-COMPLETED</option><option>CLOSED</option></select></label>
+<input type="submit" value="Filter"> <a href="/"><button type="button">Reset</button></a>
+</form>
+
+<table id="myTable">
+<tr><th>Actions</th><th>Case ID</th><th>Name / Email / Phone</th><th>Product</th><th>Location</th><th>Region</th><th>Status</th></tr>
+{% for r in rows %}
+<tr>
+<td><a href="/edit/{{r[0]}}">Edit</a> | <a href="/delete/{{r[0]}}" onclick="return confirm('Delete panlama?')">Delete</a></td>
+<td>{{r[0]}}</td>
+<td><b>{{r[1]}}</b><br>{{r[2]}}<br>{{r[5]}}</td>
+<td>{{r[7]}}</td>
+<td>{{r[10]}}</td>
+<td>{{r[12]}}</td>
+<td><span class="badge">{{r[13]}}</span></td>
+</tr>
+{% endfor %}
+</table>
+<br><a href="/add">+ Add New Service</a>
+</div>
+<script>
+function mySearch(){
+  var v=document.getElementById("search").value.toLowerCase();
+  var rows=document.querySelectorAll("#myTable tr");
+  for(var i=1;i<rows.length;i++){ rows[i].style.display = rows[i].innerText.toLowerCase().includes(v) ? "" : "none"; }
+}
+</script>
+</body>
+</html>
